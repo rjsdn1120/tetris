@@ -31,8 +31,15 @@ function createBlock(boxID){
 
 }
 
+function fillBlock(){
+
+}
+
 
 $("#startBtn").on("click", function(event){
+
+    
+
 	gameMode = true;
 	$("label#score").text(0);
 	$("#startBtn").css("visibility", "hidden");
@@ -46,9 +53,10 @@ $("#startBtn").on("click", function(event){
 	InitMap(userGameBoxID);
 	// InitMap(comGameBoxID);
 	createBlockOrderData();
+    $(userGameBoxID).find('tr').eq(0).find('td').eq(0).css('background-color','black')
 
 	currentBlock = createBlock(userGameBoxID);
-	guideBlock = drawGuide(currentBlock, guideBlock, userGameBoxID);
+	// guideBlock = drawGuide(currentBlock, guideBlock, userGameBoxID);
 
 	// currentBlockPC = createBlock(comGameBoxID);
 	// guideBlockPC = drawGuide(currentBlockPC, guideBlockPC, comGameBoxID);
