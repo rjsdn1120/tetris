@@ -28,13 +28,32 @@ var blockSet = [[[0,4], [0,5], [1,4], [1,5]],	// 네모
 
 
 function createBlock(boxID){
-
+    return blockSet[nextBlockType[0]]
 }
 
-function fillBlock(){
-
+function fillBlock(boxID,block){
+    console.log(block)
+    for(var i=0;i<4;i++){
+        $(boxID).find('tr').eq(block[i][0]).find('td').eq(block[i][1]).css('background-color','black')
+        // console.log(i)
+    }
 }
 
+function callbackTimer(boxID){
+    for(var i=Row-2;i>=0;i--){
+        for(var j=0;j<Col;j++){
+            // console.log($(boxID).find('tr').eq(i).find('td').eq(j).css('background-color'))
+            if($(boxID).find('tr').eq(i).find('td').eq(j).css('background-color')==='rgb(0, 0, 0)'){
+                $(boxID).find('tr').eq(i).find('td').eq(j).css('background-color','white')
+                $(boxID).find('tr').eq(i+1).find('td').eq(j).css('background-color','black')
+            }
+            else{
+                // $(boxID).find('tr').eq(i).find('td').eq(j).css('background-color','red')
+            }
+        }
+    }
+    // console.log('1')
+}
 
 $("#startBtn").on("click", function(event){
 
@@ -53,15 +72,20 @@ $("#startBtn").on("click", function(event){
 	InitMap(userGameBoxID);
 	// InitMap(comGameBoxID);
 	createBlockOrderData();
-    $(userGameBoxID).find('tr').eq(0).find('td').eq(0).css('background-color','black')
+    // $(userGameBoxID).find('tr').eq(0).find('td').eq(0).css('background-color','black')
 
 	currentBlock = createBlock(userGameBoxID);
+    fillBlock(userGameBoxID,currentBlock)
 	// guideBlock = drawGuide(currentBlock, guideBlock, userGameBoxID);
 
 	// currentBlockPC = createBlock(comGameBoxID);
 	// guideBlockPC = drawGuide(currentBlockPC, guideBlockPC, comGameBoxID);
 
-	timer = setTimeout(function(){
+	// timer = setTimeout(function(){
+	// 	callbackTimer(userGameBoxID);
+	// }, autoDropTime);
+
+    timer = setInterval(function(){
 		callbackTimer(userGameBoxID);
 	}, autoDropTime);
 
